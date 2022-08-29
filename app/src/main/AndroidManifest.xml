@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.fontsizewidget">
+
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
 
     <application
         android:allowBackup="true"
@@ -11,12 +12,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.FontSizeWidget"
-        tools:targetApi="31">
+        android:theme="@style/Theme.FontSizeWidget">
         <service
             android:name=".FontSizeService"
-            android:enabled="true"
-            android:exported="true"></service>
+            android:enabled="true" />
 
         <receiver
             android:name=".FontSizeWidget"

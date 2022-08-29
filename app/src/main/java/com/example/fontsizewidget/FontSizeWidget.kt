@@ -1,8 +1,10 @@
 package com.example.fontsizewidget
 
+import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
+import android.content.Intent
 import android.widget.RemoteViews
 
 /**
@@ -34,10 +36,17 @@ internal fun updateAppWidget(
     appWidgetManager: AppWidgetManager,
     appWidgetId: Int
 ) {
-    val widgetText = context.getString(R.string.appwidget_text)
     // Construct the RemoteViews object
     val views = RemoteViews(context.packageName, R.layout.font_size_widget)
-    views.setTextViewText(R.id.appwidget_text, widgetText)
+    views.setOnClickPendingIntent(
+        R.id.button,
+        PendingIntent.getForegroundService(
+            context,
+            appWidgetId,
+            Intent(context, FontSizeService::class.java),
+            PendingIntent.FLAG_IMMUTABLE
+        )
+    )
 
     // Instruct the widget manager to update the widget
     appWidgetManager.updateAppWidget(appWidgetId, views)
